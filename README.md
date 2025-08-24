@@ -25,7 +25,7 @@ The following class diagram illustrates the structure of the application, includ
 
 
 ## Prerequisites
-- Java 24 (JDK 22)
+- Java 24 (JDK 24)
 - Maven 4
 
 ## Installation
