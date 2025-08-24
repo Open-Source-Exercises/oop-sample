@@ -35,4 +35,8 @@ public record Address(String street, String city, String postalCode, String coun
             throw new IllegalArgumentException("Country cannot be null or blank");
         }
     }
+
+    public String toString() {
+        return String.format("%s, %s, %s, %s", street, city, postalCode, country);
+    }
 }
