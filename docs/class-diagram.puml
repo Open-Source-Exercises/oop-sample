@@ -1,0 +1,36 @@
+@startuml classDiagram
+package "Shared Context" {
+class "Money" {
+*amount : BigDecimal
+*currency : Currency
+--
++add(other)
++multiply(multiplier)
+}
+
+class "Address" {
+*street : String
+*city : String
+*postalCode : String
+*country : String
+}
+
+class "CustomerId" {
+*value : UUID
+}
+}
+
+package "CRM Context" {
+entity "Customer" {
+*id : CustomerId
+--
+name : String
+email : String
+address : Address
+--
++updateContactInfo(email, address)
++getContactInfo(): String
+}
+}
+Customer o--> "1" Address
+@enduml
