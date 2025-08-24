@@ -1,7 +1,7 @@
-package com.acme;
+package com.acme.oop;
 
-import com.acme.crm.domain.model.aggregates.Customer;
-import com.acme.shared.domain.model.valueobjects.Address;
+import com.acme.oop.crm.domain.model.aggregates.Customer;
+import com.acme.oop.shared.domain.model.valueobjects.Address;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.acme.shared.domain.model.valueobjects;
+package com.acme.oop.shared.domain.model.valueobjects;
 
 import java.util.Objects;
 
