@@ -8,9 +8,9 @@ public class Main {
         // Shared context
 
         Address address = new Address("123 Main St", "Anytown", "12345", "USA");
-        System.out.println("First Address: " + address.toString());
+        System.out.println("First Address: " + address);
         Address anotherAddress = new Address("456 Main St", "Anytown", "12345", "USA");
-        System.out.println("Second Address: " + anotherAddress.toString());
+        System.out.println("Second Address: " + anotherAddress);
         // CRM context
         Customer customer = new Customer("John Doe", "john.doe@gmail.com", address);
         System.out.println("Customer: " + customer.getContactInfo());
