@@ -26,4 +26,8 @@ public record CustomerId(UUID value) {
     public CustomerId() {
         this(UUID.randomUUID());
     }
+
+    public String toString() {
+        return value.toString();
+    }
 }
