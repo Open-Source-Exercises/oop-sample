@@ -21,7 +21,7 @@ This project is a sample Java application illustrating Object-Oriented Programmi
 ## Class Diagram
 The following class diagram illustrates the structure of the application, including the main classes and their relationships.
 
-![classDiagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/upc-pre-202510-1asi0729-sandbox/oop-sample/refs/heads/master/docs/class-diagram.puml?token=GHSAT0AAAAAADJGFNEY4ACWCBQD4Z7G2RCU2FLZOPA)
+![classDiagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/upc-pre-202520-1asi0729-sandbox/oop-sample/refs/heads/master/docs/class-diagram.puml?token=GHSAT0AAAAAADJGFNEYNGINXWN5KKNPGKSO2FLZPUA)
 
 
 ## Prerequisites
