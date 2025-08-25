@@ -32,5 +32,35 @@ address : Address
 +getContactInfo(): String
 }
 }
+package "Sales Context" {
+entity "SalesOrder" {
+*id : UUID
+--
+customerId : CustomerId
+orderDate : LocalDateTime
+items : List<SalesOrderItem>
+totalAmount : Money
+--
++addItem(productId, quantity, unitPrice)
++calculateTotalAmount()
+}
+
+entity "SalesOrderItem" {
+productId : ProductId
+quantity : int
+unitPrice : Money
+--
++calculateItemAmount()
+}
+
+class "ProductId" {
+*value : UUID
+}
+}
 Customer o--> "1" Address
+SalesOrder o--> "1" CustomerId
+SalesOrder o--> "many" SalesOrderItem : manages
+SalesOrderItem o--> "1" Money
+SalesOrderItem o--> "1" ProductId
+SalesOrder o--> "1" Money
 @enduml
