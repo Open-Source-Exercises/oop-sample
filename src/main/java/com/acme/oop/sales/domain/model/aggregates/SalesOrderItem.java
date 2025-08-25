@@ -7,6 +7,7 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * Represents an item within a Sales Order.
@@ -30,6 +31,8 @@ public class SalesOrderItem {
             throw new IllegalArgumentException("Quantity must be greater than zero");
         if (unitPrice.amount().compareTo(BigDecimal.ZERO) <= 0)
             throw new IllegalArgumentException("Unit price must be greater than zero");
+        if (Objects.isNull(unitPrice.currency()) || Objects.isNull(unitPrice.currency().getCurrencyCode()) || unitPrice.currency().getCurrencyCode().isBlank())
+            throw new IllegalArgumentException("Unit price must have a currency");
         this.productId = productId;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
