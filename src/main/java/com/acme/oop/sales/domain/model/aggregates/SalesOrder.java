@@ -75,4 +75,12 @@ public class SalesOrder {
         return this;
     }
 
+    /**
+     * Returns the total amount of the order as a string.
+     * @return the total amount as a string, formatted as "amount currency"
+     */
+    public String getTotalAmountAsString() {
+        return this.totalAmount.amount() + " " + this.totalAmount.currency().getCurrencyCode();
+    }
+
 }
