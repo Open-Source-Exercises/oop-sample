@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 /**
  * Represents an item within a Sales Order.
  * This entity is managed by the Sales Order aggregate.
@@ -26,16 +28,18 @@ public class SalesOrderItem {
     SalesOrderItem(@NonNull ProductId productId, int quantity, @NonNull Money unitPrice) {
         if (quantity <= 0)
             throw new IllegalArgumentException("Quantity must be greater than zero");
+        if (unitPrice.amount().compareTo(BigDecimal.ZERO) <= 0)
+            throw new IllegalArgumentException("Unit price must be greater than zero");
         this.productId = productId;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
     }
 
     /**
-     * Calculates the total price of the item.
-     * @return the total price of the item
+     * Calculates the total amount of the item.
+     * @return the total amount for the item
      */
-    public Money calculateItemPrice() {
+    public Money calculateItemAmount() {
         return unitPrice.multiply(quantity);
     }
 }
