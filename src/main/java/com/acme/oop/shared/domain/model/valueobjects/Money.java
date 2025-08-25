@@ -29,7 +29,7 @@ public record Money(BigDecimal amount, Currency currency) {
         if (Objects.isNull(currency)) {
             throw new IllegalArgumentException("Currency cannot be null");
         }
-        if (amount.scale() > currency().getDefaultFractionDigits()) {
+        if (amount.scale() > currency.getDefaultFractionDigits()) {
             throw new IllegalArgumentException("Amount scale must be less than or equal to the currency fraction digits");
         }
     }
@@ -64,7 +64,7 @@ public record Money(BigDecimal amount, Currency currency) {
      * @return a new Money instance with the multiplied amount
      */
     public Money multiply(int multiplier) {
-        return new Money(amount.multiply(BigDecimal.valueOf(multiplier)), currency);
+        return new Money(amount.multiply(BigDecimal.valueOf(multiplier)), this.currency);
     }
 
 }
