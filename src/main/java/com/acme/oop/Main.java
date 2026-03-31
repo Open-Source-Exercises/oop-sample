@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.Currency;
 
 public class Main {
-    public static void main(String[] args) {
+    static void main() {
         // Shared context
         Address address = new Address("123 Main St", "Anytown", "12345", "USA");
         System.out.println("First Address: " + address);
