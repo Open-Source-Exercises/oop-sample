@@ -12,7 +12,7 @@ This project is a sample Java application illustrating Object-Oriented Programmi
 ### Features
 - **OOP Principles**: Encapsulation, immutability, and single responsibility
 - **Domain-Driven Design Concepts**: Bounded contexts, aggregates, value objects
-- **Java 24**: Records for value objects
+- **Java 26**: Records for value objects
 - **Lombok**: Reduces boilerplate code
 - **Apache Commons Lang**: String utilities 
 - **Maven**: Build management
@@ -25,14 +25,14 @@ The following class diagram illustrates the structure of the application, includ
 
 
 ## Prerequisites
-- Java 24 (JDK 24)
-- Maven 4
+- Java 26 (JDK 26)
+- Maven 3.15
 
 ## Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/upc-pre-202520-1asi0729-sandbox/oop-sample.git
+   git clone https://github.com/upc-pre-202610-1asi0729-sandbox/oop-sample.git
    cd oop-sample
 
 2. Build the project using Maven:
