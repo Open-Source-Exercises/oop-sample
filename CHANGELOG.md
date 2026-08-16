@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Architecture Decision Records (`docs/adr/`) documenting Records for VOs, Bounded Contexts, Aggregate Root Encapsulation, and Money modeling.
-- Requirements Traceability Matrix in `docs/user-stories.md` mapping US01–US04 to domain aggregates and unit tests.
+- Requirements Traceability Matrix in `docs/user-stories.md` mapping US01 – US04 to domain aggregates and unit tests.
 - Package-level documentation (`package-info.java`) for all bounded contexts and shared kernel.
 - Explicit `maven-javadoc-plugin` and `exec-maven-plugin` configurations in `pom.xml`.
 - Project contribution guide (`CONTRIBUTING.md`).
