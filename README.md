@@ -138,12 +138,18 @@ oop-sample/
 
 ---
 
+## Contributing
+
+We welcome contributions from the community. Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute, report issues, and submit pull requests.
+
+---
+
 ## Authors
 
-- **Open Source Application Development Team**
+- **Open-Source Application Development Team**
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License – see the [LICENSE.md](LICENSE.md) file for details.
