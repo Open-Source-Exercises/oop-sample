@@ -40,7 +40,40 @@ public record Money(BigDecimal amount, Currency currency) {
      * @return a Money instance with zero amount value in USD
      */
     public static Money zero() {
-        return new Money(BigDecimal.ZERO, Currency.getInstance("USD"));
+        return zero(Currency.getInstance("USD"));
+    }
+
+    /**
+     * Creates a zero-amount Money instance in the specified currency.
+     *
+     * @param currency the currency, it must not be null
+     * @return a Money instance with zero amount in the specified currency
+     */
+    public static Money zero(Currency currency) {
+        return new Money(BigDecimal.ZERO, currency);
+    }
+
+    /**
+     * Factory method to create a Money instance.
+     *
+     * @param amount   the monetary amount
+     * @param currency the currency
+     * @return a new Money instance
+     */
+    public static Money of(BigDecimal amount, Currency currency) {
+        return new Money(amount, currency);
+    }
+
+    /**
+     * Factory method to create a Money instance from string values.
+     *
+     * @param amount       the monetary amount as string
+     * @param currencyCode the ISO 4217 currency code
+     * @return a new Money instance
+     */
+    public static Money of(String amount, String currencyCode) {
+        Objects.requireNonNull(currencyCode, "Currency code cannot be null");
+        return new Money(new BigDecimal(amount), Currency.getInstance(currencyCode));
     }
 
     /**
@@ -48,9 +81,12 @@ public record Money(BigDecimal amount, Currency currency) {
      *
      * @param other the Money value to add, must have the same currency
      * @return a new Money instance with the summed amount
-     * @throws IllegalArgumentException if currencies differ
+     * @throws IllegalArgumentException if other is null or currencies differ
      */
     public Money add(Money other) {
+        if (Objects.isNull(other)) {
+            throw new IllegalArgumentException("Money to add cannot be null");
+        }
         if (!currency.equals(other.currency)) {
             throw new IllegalArgumentException("Cannot add different currencies");
         }
@@ -60,11 +96,19 @@ public record Money(BigDecimal amount, Currency currency) {
     /**
      * Multiplies this Money instance by a factor.
      *
-     * @param multiplier the multiplication factor
+     * @param multiplier the multiplication factor, must be non-negative
      * @return a new Money instance with the multiplied amount
+     * @throws IllegalArgumentException if multiplier is negative
      */
     public Money multiply(int multiplier) {
+        if (multiplier < 0) {
+            throw new IllegalArgumentException("Multiplier cannot be negative");
+        }
         return new Money(amount.multiply(BigDecimal.valueOf(multiplier)), this.currency);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s %s", amount.toPlainString(), currency.getCurrencyCode());
+    }
 }

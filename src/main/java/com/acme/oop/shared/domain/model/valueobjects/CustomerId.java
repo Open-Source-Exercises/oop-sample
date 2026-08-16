@@ -27,6 +27,7 @@ public record CustomerId(UUID value) {
         this(UUID.randomUUID());
     }
 
+    @Override
     public String toString() {
         return value.toString();
     }
