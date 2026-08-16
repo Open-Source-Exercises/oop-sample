@@ -1,66 +1,79 @@
 @startuml classDiagram
 package "Shared Context" {
-class "Money" {
-*amount : BigDecimal
-*currency : Currency
---
-+add(other)
-+multiply(multiplier)
-}
+    class "Money" <<Value Object (Record)>> {
+        *amount : BigDecimal
+        *currency : Currency
+        --
+        +{static} zero() : Money
+        +{static} zero(currency) : Money
+        +{static} of(amount, currency) : Money
+        +{static} of(amount, currencyCode) : Money
+        +add(other) : Money
+        +multiply(multiplier) : Money
+    }
 
-class "Address" {
-*street : String
-*city : String
-*postalCode : String
-*country : String
-}
+    class "Address" <<Value Object (Record)>> {
+        *street : String
+        *city : String
+        *postalCode : String
+        *country : String
+    }
 
-class "CustomerId" {
-*value : UUID
-}
+    class "CustomerId" <<Value Object (Record)>> {
+        *value : UUID
+    }
 }
 
 package "CRM Context" {
-entity "Customer" {
-*id : CustomerId
---
-name : String
-email : String
-address : Address
---
-+updateContactInfo(email, address)
-+getContactInfo(): String
+    entity "Customer" <<Aggregate Root>> {
+        *id : CustomerId
+        --
+        name : String
+        email : String
+        address : Address
+        --
+        +updateContactInfo(email, address) : void
+        +updateName(name) : void
+        +getContactInfo() : String
+    }
 }
-}
+
 package "Sales Context" {
-entity "SalesOrder" {
-*id : UUID
---
-customerId : CustomerId
-orderDate : LocalDateTime
-items : List<SalesOrderItem>
-totalAmount : Money
---
-+addItem(productId, quantity, unitPrice)
-+calculateTotalAmount()
+    entity "SalesOrder" <<Aggregate Root>> {
+        *id : UUID
+        --
+        customerId : CustomerId
+        currency : Currency
+        orderDate : LocalDateTime
+        items : List<SalesOrderItem>
+        totalAmount : Money
+        --
+        +addItem(productId, quantity, unitPrice) : void
+        +calculateTotalAmount() : Money
+        +getItems() : List<SalesOrderItem>
+        +withOrderDate(orderDate) : SalesOrder
+        +getTotalAmountAsString() : String
+    }
+
+    entity "SalesOrderItem" <<Entity>> {
+        productId : ProductId
+        quantity : int
+        unitPrice : Money
+        --
+        +calculateItemAmount() : Money
+    }
+
+    class "ProductId" <<Value Object (Record)>> {
+        *value : UUID
+    }
 }
 
-entity "SalesOrderItem" {
-productId : ProductId
-quantity : int
-unitPrice : Money
---
-+calculateItemAmount()
-}
-
-class "ProductId" {
-*value : UUID
-}
-}
+Customer *--> "1" CustomerId
 Customer o--> "1" Address
-SalesOrder o--> "1" CustomerId
-SalesOrder o--> "many" SalesOrderItem : manages
-SalesOrderItem o--> "1" Money
-SalesOrderItem o--> "1" ProductId
-SalesOrder o--> "1" Money
+
+SalesOrder *--> "1" CustomerId
+SalesOrder *--> "1" Money : totalAmount
+SalesOrder *--> "many" SalesOrderItem : manages
+SalesOrderItem *--> "1" ProductId
+SalesOrderItem *--> "1" Money : unitPrice
 @enduml
