@@ -3,8 +3,6 @@ package com.acme.oop.sales.domain.model.aggregates;
 import com.acme.oop.sales.domain.model.valueobjects.ProductId;
 import com.acme.oop.shared.domain.model.valueobjects.Money;
 import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Objects;

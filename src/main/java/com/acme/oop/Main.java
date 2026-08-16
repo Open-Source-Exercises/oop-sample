@@ -6,7 +6,6 @@ import com.acme.oop.sales.domain.model.valueobjects.ProductId;
 import com.acme.oop.shared.domain.model.valueobjects.Address;
 import com.acme.oop.shared.domain.model.valueobjects.Money;
 
-import java.math.BigDecimal;
 import java.util.Currency;
 
 public class Main {
