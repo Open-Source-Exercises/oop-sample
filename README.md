@@ -31,7 +31,7 @@ The following class diagram illustrates the structure of the application, includ
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/upc-pre-202610-1asi0729-sandbox/oop-sample.git
+   git clone https://github.com/<organization-name>/oop-sample.git
    cd oop-sample
    ```
 
