@@ -8,8 +8,31 @@ import com.acme.oop.shared.domain.model.valueobjects.Money;
 
 import java.util.Currency;
 
+/**
+ * Entry point and interactive demonstration for the OOP Sample application.
+ * <p>
+ * This class demonstrates the creation and interaction of Domain-Driven Design (DDD)
+ * aggregates, entities, and value objects across the CRM and Sales bounded contexts,
+ * as well as runtime validation of domain invariants.
+ * </p>
+ *
+ * @author Open Source Application Development Team
+ * @since 1.0.0
+ */
 public class Main {
-    static void main(String[] args) {
+
+    /**
+     * Private constructor to prevent instantiation of the utility/entrypoint class.
+     */
+    private Main() {
+    }
+
+    /**
+     * Executes the domain demonstration scenarios.
+     *
+     * @param args command-line arguments (not used)
+     */
+    public static void main(String[] args) {
         System.out.println("=== 1. Shared Context: Value Objects ===");
         Address address = new Address("123 Main St", "Anytown", "12345", "USA");
         System.out.println("Customer Address: " + address);
