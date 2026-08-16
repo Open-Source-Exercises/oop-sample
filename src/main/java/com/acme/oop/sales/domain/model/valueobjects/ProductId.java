@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Represents a unique identifier for a product within Sales bounded context.
+ * Represents a unique identifier for a product within Sales bounded-context.
  *
  * @param value the product identifier, it must not be null
  *

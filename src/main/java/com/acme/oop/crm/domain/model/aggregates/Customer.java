@@ -3,8 +3,6 @@ package com.acme.oop.crm.domain.model.aggregates;
 import com.acme.oop.shared.domain.model.valueobjects.Address;
 import com.acme.oop.shared.domain.model.valueobjects.CustomerId;
 import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
 
 import java.util.Objects;
 
@@ -23,10 +21,10 @@ public class Customer {
     /**
      * Constructs a Customer aggregate with an existing ID, for repository reconstitution.
      *
-     * @param id      the customer unique identifier, must not be null
-     * @param name    the customer name, must not be null or blank
-     * @param email   the customer email, must not be null or blank
-     * @param address the customer address, must not be null
+     * @param id      the customer unique identifier, which must not be null
+     * @param name    the customer name, which must not be null or blank
+     * @param email   the customer email, which must not be null or blank
+     * @param address the customer address, which must not be null
      * @throws IllegalArgumentException if any argument is null or blank
      */
     public Customer(CustomerId id, String name, String email, Address address) {
@@ -64,9 +62,9 @@ public class Customer {
     /**
      * Updates the contact information of the customer.
      *
-     * @param email   the new customer email, it must not be null or blank
-     * @param address the new customer address, it must not be null
-     * @throws IllegalArgumentException if email is null/blank or address is null
+     * @param email   the new customer email, which must not be null or blank
+     * @param address the new customer address, which must not be null
+     * @throws IllegalArgumentException thrown if email is null/blank or address is null
      */
     public void updateContactInfo(String email, Address address) {
         if (Objects.isNull(email) || email.isBlank()) {
@@ -82,8 +80,8 @@ public class Customer {
     /**
      * Updates the customer's name.
      *
-     * @param name the new customer name, it must not be null or blank
-     * @throws IllegalArgumentException if name is null or blank
+     * @param name the new customer name, which must not be null or blank
+     * @throws IllegalArgumentException if the name is null or blank
      */
     public void updateName(String name) {
         if (Objects.isNull(name) || name.isBlank()) {

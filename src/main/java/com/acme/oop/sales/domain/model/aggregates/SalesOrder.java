@@ -4,16 +4,10 @@ import com.acme.oop.sales.domain.model.valueobjects.ProductId;
 import com.acme.oop.shared.domain.model.valueobjects.CustomerId;
 import com.acme.oop.shared.domain.model.valueobjects.Money;
 import lombok.Getter;
-import lombok.NonNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Currency;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Represents a Sales Order aggregate in the Sales context.
@@ -136,7 +130,7 @@ public class SalesOrder {
     /**
      * Sets the order date.
      *
-     * @param orderDate the order date, it must not be null
+     * @param orderDate the order date, which must not be null
      * @return this Sales Order instance
      */
     public SalesOrder withOrderDate(LocalDateTime orderDate) {
