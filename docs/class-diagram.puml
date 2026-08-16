@@ -1,15 +1,15 @@
 @startuml classDiagram
-package "Shared Context" {
+package "com.acme.oop.shared.domain.model.valueobjects" {
     class "Money" <<Value Object (Record)>> {
         *amount : BigDecimal
         *currency : Currency
         --
         +{static} zero() : Money
-        +{static} zero(currency) : Money
-        +{static} of(amount, currency) : Money
-        +{static} of(amount, currencyCode) : Money
-        +add(other) : Money
-        +multiply(multiplier) : Money
+        +{static} zero(currency: Currency) : Money
+        +{static} of(amount: BigDecimal, currency: Currency) : Money
+        +{static} of(amount: String, currencyCode: String) : Money
+        +add(other: Money) : Money
+        +multiply(multiplier: int) : Money
     }
 
     class "Address" <<Value Object (Record)>> {
@@ -21,50 +21,64 @@ package "Shared Context" {
 
     class "CustomerId" <<Value Object (Record)>> {
         *value : UUID
+        --
+        +CustomerId()
+        +CustomerId(value: UUID)
     }
 }
 
-package "CRM Context" {
+package "com.acme.oop.crm.domain.model.aggregates" {
     entity "Customer" <<Aggregate Root>> {
         *id : CustomerId
         --
-        name : String
-        email : String
-        address : Address
+        -name : String
+        -email : String
+        -address : Address
         --
-        +updateContactInfo(email, address) : void
-        +updateName(name) : void
+        +Customer(id: CustomerId, name: String, email: String, address: Address)
+        +Customer(name: String, email: String, address: Address)
+        +updateContactInfo(email: String, address: Address) : void
+        +updateName(name: String) : void
         +getContactInfo() : String
     }
 }
 
-package "Sales Context" {
+package "com.acme.oop.sales.domain.model.valueobjects" {
+    class "ProductId" <<Value Object (Record)>> {
+        *value : UUID
+        --
+        +ProductId()
+        +ProductId(value: UUID)
+    }
+}
+
+package "com.acme.oop.sales.domain.model.aggregates" {
     entity "SalesOrder" <<Aggregate Root>> {
         *id : UUID
         --
-        customerId : CustomerId
-        currency : Currency
-        orderDate : LocalDateTime
-        items : List<SalesOrderItem>
-        totalAmount : Money
+        -customerId : CustomerId
+        -currency : Currency
+        -orderDate : LocalDateTime
+        -items : List<SalesOrderItem>
+        -totalAmount : Money
         --
-        +addItem(productId, quantity, unitPrice) : void
+        +SalesOrder(id: UUID, customerId: CustomerId, orderDate: LocalDateTime, currency: Currency)
+        +SalesOrder(customerId: CustomerId, currency: Currency)
+        +SalesOrder(customerId: CustomerId)
+        +addItem(productId: ProductId, quantity: int, unitPrice: Money) : void
         +calculateTotalAmount() : Money
         +getItems() : List<SalesOrderItem>
-        +withOrderDate(orderDate) : SalesOrder
+        +withOrderDate(orderDate: LocalDateTime) : SalesOrder
         +getTotalAmountAsString() : String
     }
 
     entity "SalesOrderItem" <<Entity>> {
-        productId : ProductId
-        quantity : int
-        unitPrice : Money
+        -productId : ProductId
+        -quantity : int
+        -unitPrice : Money
         --
+        ~SalesOrderItem(productId: ProductId, quantity: int, unitPrice: Money)
         +calculateItemAmount() : Money
-    }
-
-    class "ProductId" <<Value Object (Record)>> {
-        *value : UUID
     }
 }
 
