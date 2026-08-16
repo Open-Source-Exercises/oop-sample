@@ -48,8 +48,6 @@ The domain architecture is structured into tactical Domain-Driven Design (DDD) p
 ### Class Diagram
 The application domain model is specified in [docs/class-diagram.puml](docs/class-diagram.puml).
 
-![Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/upc-pre-202620-1asi0729-sandbox/oop-sample/refs/heads/main/docs/class-diagram.puml)
-
 ---
 
 ## Project Structure
@@ -101,7 +99,7 @@ oop-sample/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/upc-pre-202620-1asi0729-sandbox/oop-sample.git
+   git clone https://<organization-url>/oop-sample.git
    cd oop-sample
    ```
 
