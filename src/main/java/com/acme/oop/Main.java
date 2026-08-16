@@ -30,20 +30,15 @@ public class Main {
     /**
      * Executes the domain demonstration scenarios.
      *
-     * @param args command-line arguments (not used)
      */
-    public static void main(String[] args) {
+    static void main() {
         System.out.println("=== 1. Shared Context: Value Objects ===");
         Address address = new Address("123 Main St", "Anytown", "12345", "USA");
-        System.out.println("Customer Address: " + address);
         Address newAddress = new Address("456 Market Ave", "Springfield", "67890", "USA");
 
-        System.out.println("\n=== 2. CRM Context: Customer Aggregate ===");
         Customer customer = new Customer("John Doe", "john.doe@example.com", address);
-        System.out.println("Registered Customer ID: " + customer.getId());
         System.out.println("Customer Contact Info: " + customer.getContactInfo());
 
-        System.out.println("Updating contact info...");
         customer.updateContactInfo("john.new@example.com", newAddress);
         System.out.println("Updated Contact Info: " + customer.getContactInfo());
 
@@ -55,25 +50,19 @@ public class Main {
         Money laptopPrice = Money.of("999.99", "USD");
         Money mousePrice = Money.of("25.50", "USD");
 
-        System.out.println("Adding Laptop (qty 1) and Mouse (qty 2)...");
         order.addItem(laptopId, 1, laptopPrice);
         order.addItem(mouseId, 2, mousePrice);
 
-        System.out.println("Order ID: " + order.getId());
         System.out.println("Order Date: " + order.getOrderDate());
-        System.out.println("Total Items: " + order.getItems().size());
         System.out.println("Total Amount: " + order.getTotalAmountAsString());
 
-        System.out.println("\n=== 4. Domain Invariant Protection Demonstration ===");
         try {
-            System.out.println("Attempting to add item with mismatching currency (EUR to USD order)...");
             order.addItem(new ProductId(), 1, Money.of("10.00", "EUR"));
         } catch (IllegalArgumentException e) {
             System.out.println("Caught expected invariant violation: " + e.getMessage());
         }
 
         try {
-            System.out.println("Attempting to register customer with blank name...");
             new Customer("   ", "invalid@example.com", address);
         } catch (IllegalArgumentException e) {
             System.out.println("Caught expected invariant violation: " + e.getMessage());
