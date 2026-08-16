@@ -10,29 +10,53 @@ import java.math.BigDecimal;
 import java.util.Currency;
 
 public class Main {
-    static void main() {
-        // Shared context
+    public static void main(String[] args) {
+        System.out.println("=== 1. Shared Context: Value Objects ===");
         Address address = new Address("123 Main St", "Anytown", "12345", "USA");
-        System.out.println("First Address: " + address);
-        Address anotherAddress = new Address("456 Main St", "Anytown", "12345", "USA");
-        System.out.println("Second Address: " + anotherAddress);
-        // CRM context
-        System.out.println("Creating a customer...");
-        Customer customer = new Customer("John Doe", "john.doe@gmail.com", address);
+        System.out.println("Customer Address: " + address);
+        Address newAddress = new Address("456 Market Ave", "Springfield", "67890", "USA");
+
+        System.out.println("\n=== 2. CRM Context: Customer Aggregate ===");
+        Customer customer = new Customer("John Doe", "john.doe@example.com", address);
+        System.out.println("Registered Customer ID: " + customer.getId());
         System.out.println("Customer Contact Info: " + customer.getContactInfo());
-        System.out.println("Updating customer contact info...");
-        customer.updateContactInfo(customer.getEmail(), anotherAddress);
-        System.out.println("Customer Contact Info: " + customer.getContactInfo());
-        // Sales context
-        System.out.println("Creating a sales order...");
-        SalesOrder order = new SalesOrder(customer.getId());
-        Money price = new Money(new BigDecimal("29.99"), Currency.getInstance("USD"));
-        ProductId productId = new ProductId();
-        order.addItem(productId, 2, price);
+
+        System.out.println("Updating contact info...");
+        customer.updateContactInfo("john.new@example.com", newAddress);
+        System.out.println("Updated Contact Info: " + customer.getContactInfo());
+
+        System.out.println("\n=== 3. Sales Context: Sales Order Aggregate ===");
+        SalesOrder order = new SalesOrder(customer.getId(), Currency.getInstance("USD"));
+        ProductId laptopId = new ProductId();
+        ProductId mouseId = new ProductId();
+
+        Money laptopPrice = Money.of("999.99", "USD");
+        Money mousePrice = Money.of("25.50", "USD");
+
+        System.out.println("Adding Laptop (qty 1) and Mouse (qty 2)...");
+        order.addItem(laptopId, 1, laptopPrice);
+        order.addItem(mouseId, 2, mousePrice);
+
         System.out.println("Order ID: " + order.getId());
         System.out.println("Order Date: " + order.getOrderDate());
-        System.out.println("Customer ID: " + order.getCustomerId());
+        System.out.println("Total Items: " + order.getItems().size());
         System.out.println("Total Amount: " + order.getTotalAmountAsString());
 
+        System.out.println("\n=== 4. Domain Invariant Protection Demonstration ===");
+        try {
+            System.out.println("Attempting to add item with mismatching currency (EUR to USD order)...");
+            order.addItem(new ProductId(), 1, Money.of("10.00", "EUR"));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Caught expected invariant violation: " + e.getMessage());
+        }
+
+        try {
+            System.out.println("Attempting to register customer with blank name...");
+            new Customer("   ", "invalid@example.com", address);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Caught expected invariant violation: " + e.getMessage());
+        }
+
+        System.out.println("\n=== OOP Sample Demo Completed Successfully ===");
     }
 }

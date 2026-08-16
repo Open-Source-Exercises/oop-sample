@@ -27,4 +27,9 @@ public record ProductId(UUID value) {
     public ProductId() {
         this(UUID.randomUUID());
     }
+
+    @Override
+    public String toString() {
+        return value.toString();
+    }
 }
