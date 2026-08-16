@@ -16,45 +16,106 @@ import java.util.Objects;
 @Getter
 public class Customer {
     private final CustomerId id;
-    @Setter @NonNull private String name;
-    @Setter @NonNull private String email;
-    @Setter @NonNull private Address address;
+    private String name;
+    private String email;
+    private Address address;
 
     /**
-     * Creates a Customer aggregate with the given information.
-     * @param name      the customer name, it must not be null or blank
-     * @param email     the customer email, it must not be null or blank
-     * @param address   the customer address, it must not be null
+     * Constructs a Customer aggregate with an existing ID, for repository reconstitution.
      *
+     * @param id      the customer unique identifier, must not be null
+     * @param name    the customer name, must not be null or blank
+     * @param email   the customer email, must not be null or blank
+     * @param address the customer address, must not be null
+     * @throws IllegalArgumentException if any argument is null or blank
+     */
+    public Customer(CustomerId id, String name, String email, Address address) {
+        if (Objects.isNull(id)) {
+            throw new IllegalArgumentException("Customer identifier cannot be null");
+        }
+        if (Objects.isNull(name) || name.isBlank()) {
+            throw new IllegalArgumentException("Customer name cannot be null or blank");
+        }
+        if (Objects.isNull(email) || email.isBlank()) {
+            throw new IllegalArgumentException("Customer email cannot be null or blank");
+        }
+        if (Objects.isNull(address)) {
+            throw new IllegalArgumentException("Customer address cannot be null");
+        }
+
+        this.id = id;
+        this.name = name.strip();
+        this.email = email.strip();
+        this.address = address;
+    }
+
+    /**
+     * Creates a new Customer aggregate with a generated ID.
+     *
+     * @param name    the customer name, it must not be null or blank
+     * @param email   the customer email, it must not be null or blank
+     * @param address the customer address, it must not be null
      * @throws IllegalArgumentException if any of the parameters is null or blank
      */
     public Customer(String name, String email, Address address) {
-        if (Objects.isNull(name) || name.isBlank())
-            throw new IllegalArgumentException("Customer name cannot be null or blank");
-        if (Objects.isNull(email) || email.isBlank())
-            throw new IllegalArgumentException("Customer email cannot be null or blank");
-        if (Objects.isNull(address))
-            throw new IllegalArgumentException("Customer address cannot be null");
-
-        this.id = new CustomerId();
-        this.name = name;
-        this.email = email;
-        this.address = address;
+        this(new CustomerId(), name, email, address);
     }
 
     /**
      * Updates the contact information of the customer.
-     * @param email     the customer email, it must not be null or blank
-     * @param address   the customer address, it must not be null
+     *
+     * @param email   the new customer email, it must not be null or blank
+     * @param address the new customer address, it must not be null
+     * @throws IllegalArgumentException if email is null/blank or address is null
      */
-    public void updateContactInfo(@NonNull String email, @NonNull Address address) {
-        if (email.isBlank())
+    public void updateContactInfo(String email, Address address) {
+        if (Objects.isNull(email) || email.isBlank()) {
             throw new IllegalArgumentException("Customer email cannot be null or blank");
-        this.email = email;
+        }
+        if (Objects.isNull(address)) {
+            throw new IllegalArgumentException("Customer address cannot be null");
+        }
+        this.email = email.strip();
         this.address = address;
     }
 
+    /**
+     * Updates the customer's name.
+     *
+     * @param name the new customer name, it must not be null or blank
+     * @throws IllegalArgumentException if name is null or blank
+     */
+    public void updateName(String name) {
+        if (Objects.isNull(name) || name.isBlank()) {
+            throw new IllegalArgumentException("Customer name cannot be null or blank");
+        }
+        this.name = name.strip();
+    }
+
+    /**
+     * Returns formatted customer contact information.
+     *
+     * @return contact information string representation
+     */
     public String getContactInfo() {
         return String.format("%s <%s>, %s", name, email, address);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(id, customer.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Customer[id=%s, name=%s, email=%s, address=%s]", id, name, email, address);
     }
 }
