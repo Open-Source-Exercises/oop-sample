@@ -22,7 +22,7 @@ public record Address(String street, String city, String postalCode, String coun
      * @throws IllegalArgumentException if any of the parameters is null or blank
      */
     public Address {
-        if (street == null || street.isBlank()) {
+        if (Objects.isNull(street) || street.isBlank()) {
             throw new IllegalArgumentException("Street cannot be null or blank");
         }
         if (Objects.isNull(city) || city.isBlank()) {
@@ -31,11 +31,16 @@ public record Address(String street, String city, String postalCode, String coun
         if (Objects.isNull(postalCode) || postalCode.isBlank()) {
             throw new IllegalArgumentException("Postal code cannot be null or blank");
         }
-        if(Objects.isNull(country) || country.isBlank()){
+        if (Objects.isNull(country) || country.isBlank()) {
             throw new IllegalArgumentException("Country cannot be null or blank");
         }
+        street = street.strip();
+        city = city.strip();
+        postalCode = postalCode.strip();
+        country = country.strip();
     }
 
+    @Override
     public String toString() {
         return String.format("%s, %s, %s, %s", street, city, postalCode, country);
     }
