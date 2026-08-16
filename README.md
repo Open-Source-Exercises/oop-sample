@@ -132,7 +132,7 @@ oop-sample/
 
 - [User Stories & Traceability Matrix](docs/user-stories.md)
 - [Class Diagram Source](docs/class-diagram.puml)
-- [Architecture Decision Records (ADRs)](docs/adr/README.md)
+- [Architecture Decision Records (ADRs)](docs/adrs.md)
 - [Contributing Guidelines](CONTRIBUTING.md)
 - [Changelog](CHANGELOG.md)
 
