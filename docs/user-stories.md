@@ -1,17 +1,17 @@
 # User Stories & Domain Specifications
 
-This document contains the user stories, acceptance criteria, domain business invariants, and requirements traceability matrix for the **OOP Sample** project.
+This document contains the user stories, acceptance criteria, domain business invariants, and requirement traceability matrix for the **OOP Sample** project.
 
 ---
 
 ## Requirements Traceability Matrix
 
-| Story ID | User Story Title | Bounded Context | Aggregate / Entity | Primary Implementation | Test Suite |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **US01** | Register a New Customer | CRM Context | [`Customer`](../src/main/java/com/acme/oop/crm/domain/model/aggregates/Customer.java) | `Customer(name, email, address)` | [`CustomerTest$RegisterCustomerTests`](../src/test/java/com/acme/oop/crm/domain/model/aggregates/CustomerTest.java) |
-| **US02** | Update Customer Contact Information | CRM Context | [`Customer`](../src/main/java/com/acme/oop/crm/domain/model/aggregates/Customer.java) | `updateContactInfo(email, address)`, `updateName(name)` | [`CustomerTest$UpdateContactInfoTests`](../src/test/java/com/acme/oop/crm/domain/model/aggregates/CustomerTest.java) |
-| **US03** | Create a Sales Order | Sales Context | [`SalesOrder`](../src/main/java/com/acme/oop/sales/domain/model/aggregates/SalesOrder.java) | `SalesOrder(customerId, currency)` | [`SalesOrderTest$CreateOrderTests`](../src/test/java/com/acme/oop/sales/domain/model/aggregates/SalesOrderTest.java) |
-| **US04** | Add Item to Sales Order | Sales Context | [`SalesOrder`](../src/main/java/com/acme/oop/sales/domain/model/aggregates/SalesOrder.java), [`SalesOrderItem`](../src/main/java/com/acme/oop/sales/domain/model/aggregates/SalesOrderItem.java) | `addItem(productId, quantity, unitPrice)` | [`SalesOrderTest$AddItemTests`](../src/test/java/com/acme/oop/sales/domain/model/aggregates/SalesOrderTest.java) |
+| Story ID | User Story Title                    | Bounded Context | Aggregate / Entity                                                                                                                                                                               | Primary Implementation                                  | Test Suite                                                                                                           |
+|:---------|:------------------------------------|:----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------|
+| **US01** | Register a New Customer             | CRM Context     | [`Customer`](../src/main/java/com/acme/oop/crm/domain/model/aggregates/Customer.java)                                                                                                            | `Customer(name, email, address)`                        | [`CustomerTest$RegisterCustomerTests`](../src/test/java/com/acme/oop/crm/domain/model/aggregates/CustomerTest.java)  |
+| **US02** | Update Customer Contact Information | CRM Context     | [`Customer`](../src/main/java/com/acme/oop/crm/domain/model/aggregates/Customer.java)                                                                                                            | `updateContactInfo(email, address)`, `updateName(name)` | [`CustomerTest$UpdateContactInfoTests`](../src/test/java/com/acme/oop/crm/domain/model/aggregates/CustomerTest.java) |
+| **US03** | Create a Sales Order                | Sales Context   | [`SalesOrder`](../src/main/java/com/acme/oop/sales/domain/model/aggregates/SalesOrder.java)                                                                                                      | `SalesOrder(customerId, currency)`                      | [`SalesOrderTest$CreateOrderTests`](../src/test/java/com/acme/oop/sales/domain/model/aggregates/SalesOrderTest.java) |
+| **US04** | Add Item to Sales Order             | Sales Context   | [`SalesOrder`](../src/main/java/com/acme/oop/sales/domain/model/aggregates/SalesOrder.java), [`SalesOrderItem`](../src/main/java/com/acme/oop/sales/domain/model/aggregates/SalesOrderItem.java) | `addItem(productId, quantity, unitPrice)`               | [`SalesOrderTest$AddItemTests`](../src/test/java/com/acme/oop/sales/domain/model/aggregates/SalesOrderTest.java)     |
 
 ---
 
