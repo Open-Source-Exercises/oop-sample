@@ -10,7 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.2] - 2026-08-16
 
 ### Changed
-- Updated Class Diagram in `docs/class-diagram.puml` to reflect new package structure.
+- **Class Diagram Synchronization:** Updated `docs/class-diagram.puml` to perfectly match the Java codebase:
+    - Applied full package names (`com.acme.oop...`) for better context mapping.
+    - Synchronized all method signatures with exact parameter names and types.
+    - Added visibility markers (e.g., package-private `~` for `SalesOrderItem` constructor).
+    - Added missing constructors for `Customer`, `SalesOrder`, `CustomerId`, and `ProductId`.
 
 ---
 
