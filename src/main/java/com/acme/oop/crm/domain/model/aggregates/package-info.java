@@ -1,5 +1,5 @@
 /**
- * CRM Bounded Context Aggregates.
+ * CRM Bounded-Context Aggregates.
  * <p>
  * This package encapsulates customer domain aggregates, managing customer identity,
  * lifecycle state, and contact information invariants.

@@ -1,7 +1,7 @@
 /**
- * Sales Bounded Context Value Objects.
+ * Sales Bounded-Context Value Objects.
  * <p>
- * This package contains immutable value objects specific to the Sales bounded context.
+ * This package contains immutable value objects specific to the Sales bounded-context.
  * </p>
  *
  * <ul>

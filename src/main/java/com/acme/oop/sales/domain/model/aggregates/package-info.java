@@ -1,5 +1,5 @@
 /**
- * Sales Bounded Context Aggregates and Entities.
+ * Sales Bounded-Context Aggregates and Entities.
  * <p>
  * This package encapsulates sales order aggregates and line items, enforcing order totals,
  * line item quantities, and currency consistency invariants.
