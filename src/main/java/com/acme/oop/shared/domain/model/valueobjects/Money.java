@@ -96,7 +96,7 @@ public record Money(BigDecimal amount, Currency currency) {
     /**
      * Multiplies this Money instance by a factor.
      *
-     * @param multiplier the multiplication factor, must be non-negative
+     * @param multiplier the multiplication factor, which must be non-negative
      * @return a new Money instance with the multiplied amount
      * @throws IllegalArgumentException if multiplier is negative
      */
